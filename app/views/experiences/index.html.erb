@@ -1,0 +1,38 @@
+<h3>experiences</h3>
+
+<%= link_to 'New Experience', new_experience_url, class: "btn btn-success" %>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Title</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @experiences.each do |experience| %>
+      <tr>
+        <td><%= experience.category.name %></td>
+        <td><%= experience.title %></td>
+		
+		<% if experience.location.nil?%>
+			<td></td>
+			<td></td>
+		<%else%>
+			<td><%= experience.location.country %></td>
+			<td><%= experience.location.city %></td>
+		<%end%>
+        <td>
+        	<%= link_to content_tag(:span,nil,:class=>"glyphicon glyphicon-home"), experience,  class:"btn",title: "Show","data-toggle"=>"tooltip" %>
+			<%= link_to content_tag(:span,nil,:class=>"glyphicon glyphicon-remove"), experience, method: :delete, data: { confirm: 'Are you sure?' },class:"btn", title: "Remove", "data-toggle"=>"tooltip" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

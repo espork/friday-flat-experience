@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @experience.category %>
+</p>
+
+<p>
+  <strong>Public:</strong>
+  <%= @experience.public %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @experience.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @experience.description %>
+</p>
+
+<p>
+  <strong>Included:</strong>
+  <%= @experience.included %>
+</p>
+
+<p>
+  <strong>Not included:</strong>
+  <%= @experience.not_included %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @experience.duration %>
+</p>
+
+<p>
+  <strong>Max group size:</strong>
+  <%= @experience.max_group_size %>
+</p>
+
+<p>
+  <strong>Availability:</strong>
+  <%= @experience.availability %>
+</p>
+
+<p>
+  <strong>Additional information:</strong>
+  <%= @experience.additional_information %>
+</p>
+
+<%= link_to 'Edit', edit_experience_path(@experience) %> |
+<%= link_to 'Back', experiences_path %>

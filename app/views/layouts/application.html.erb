@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FridayFLatExperience</title>
+  <%= twitter_bootstrap_stylesheet_link_tag :netdna, force: true, version: '3.0.3'%>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+  <%= csrf_meta_tags %>
+  
+</head>
+<body style="min-height: 200px;padding-top: 70px;" >
+	
+	<div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+            <span class="sr-only">Friday Flat</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+		  
+		  <%= link_to 'Home', root_path, class: "navbar-brand" %>
+          
+        </div>
+		
+        <div class="navbar-collapse collapse">
+        	
+          <ul class="nav navbar-nav">
+            <li class="active"><%= link_to 'Experiences', experiences_path %></li>
+          </ul>
+		  
+        </div>
+      </div>
+    </div>
+		
+	<div class="container">
+		
+		<div class="row">
+				
+			<% if notice %>
+				<div class="alert alert-info fade in" data-alert="alert">
+					<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+					<%= notice %>
+				</div>
+			<% end %>
+			<% if alert %>
+				<div class="alert alert-success fade in" data-alert="alert">
+					<button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+					<%= alert %>
+				</div>
+			<% end %>
+			
+		</div>
+		<div class="row">
+			<%= yield %>
+		</div>
+		
+</div>
+
+</body>
+
+</html>

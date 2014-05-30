@@ -1,0 +1,202 @@
+<%= form_for(@experience,html: {class: "form-horizontal", role: "form"} ) do |f| %>
+  <% if @experience.errors.any? %>
+  	<div class="alert alert-danger fade in">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        
+		<% @experience.errors.full_messages.each.each do |msg| %>
+			<p> <%=msg%></p>
+		<% end %>
+      </div>
+  <% end %>
+  	<div class="row">
+	  	<ul id="experienceTabs" class="nav nav-tabs">
+		  	<li class="active"><a href="#information" >Information</a></li>
+		  	<li><a href="#rules" >Rules</a></li>
+		  	<li><a href="#location">Location</a></li>
+		</ul>
+	</div>
+	</br></br>
+	<div class="row">
+	<div class="tab-content">
+		<div class="tab-pane active" id="information">
+			
+			<div class="form-group">
+				<%= f.label :category_id, class: "col-md-2 control-label" %>
+				<div class="col-xs-4">
+					<%= f.select :category_id, Category.all.collect{|b|[b.name,b.id]},{} , {:class => 'form-control input-lg'}  %>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<%= f.label :private, class: "col-sm-2 control-label" %>
+				<div class="col-md-4">
+					<div class="checkbox">
+					<%= f.check_box :private %>
+					</div>
+				</div>
+			</div>
+		
+		
+			<div class="form-group">
+				<%= f.label :title, class: "col-sm-2 control-label" %>
+				<div class="col-xs-4">
+					<%= f.text_field :title, class: "form-control input-lg" %>
+				</div>
+			</div>
+		
+		
+			<div class="form-group">
+				<%= f.label :description, class: "col-sm-2 control-label" %>
+				<div class="col-xs-7">
+					<%= f.text_area :description, class: "form-control input-lg" %>
+				</div>
+			</div>
+		
+		
+			<div class="form-group">
+				<%= f.label :included, class: "col-sm-2 control-label" %>
+				<div class="col-xs-7">
+					<%= f.text_area :included, class: "form-control input-lg" %>
+				</div>
+			</div>
+		
+		
+			<div class="form-group">
+				<%= f.label :not_included, class: "col-sm-2 control-label" %>
+				<div class="col-xs-7">
+					<%= f.text_area :not_included, class: "form-control input-lg" %>
+				</div>
+			</div>
+			
+			<div class="form-group">
+    			<div class="col-sm-offset-2 col-xs-7">
+	    			<%= link_to 'Cancel', experiences_path,class: "btn btn-default btn-xs", role: "button" %>
+					<button type="button" class="btn btn-primary btn-xs" id="nextExpBtn">Next</button>
+    			</div>
+  			</div>
+		
+		</div>
+		<div class="tab-pane" id="rules">
+	
+			<div class="form-group">
+				<label for="experience_category_id" class="col-sm-2 control-label">Programs</label>
+				<a href="#" class="duplicate_program_form"><i class="fa fa-plus-square" ></i></a>
+				<a href="#" class="destroy_duplicate_program_form"><i class="fa fa-minus-square" ></i></a>
+				
+				<div class="col-md-6">
+				<%= f.fields_for :programs do |programs_form| %>
+			        
+			            <div class="form-group row duplicatable_program_form">
+			            	
+			                <div class="col-xs-5">
+			                	<%= programs_form.text_field :when, class: "form-control input-lg", placeholder: "When" %>
+			                </div>
+			                
+			                <div class="col-xs-5">
+			                    <%= programs_form.text_field :what, class: "form-control input-lg", placeholder: "What"%>
+			                </div>
+							<div class="col-xs-1">
+								
+							</div>
+			            </div>
+				<%end%>
+				</div>
+			</div>
+		
+		
+			<div class="form-group">
+				<%= f.label :duration, class: "col-sm-2 control-label" %>
+				<div class="col-md-6">
+					<div class="form-group row">
+			            	
+			                <div class="col-xs-5">
+			                	<%= f.select(:duration, (1..12),{}, {:class => 'form-control input-lg'} ) %>
+			                </div>
+			                
+			                <div class="col-xs-5">
+			                    <%= f.select(:duration_type,  ['Hours', 'Days'],{}, {:class => 'form-control input-lg'} ) %>
+			                </div>
+			            </div>
+					
+				</div>
+			</div>
+		
+		
+			<div class="form-group">
+				<%= f.label :max_group_size, class: "col-sm-2 control-label" %>
+				<div class="col-md-2">
+					<%= f.select(:max_group_size, (1..30),{}, {:class => 'form-control input-lg'} ) %>
+				</div>
+			</div>
+		
+		
+			<div class="form-group">
+				<%= f.label :availability, class: "col-sm-2 control-label" %>
+				<div class="col-xs-7">
+					<%= f.text_field :availability, class: "form-control input-lg" %>
+				</div>
+			</div>
+		
+		
+			<div class="form-group">
+				<%= f.label :additional_information, class: "col-sm-2 control-label" %>
+				<div class="col-xs-7">
+					<%= f.text_area :additional_information, class: "form-control input-lg" %>
+				</div>
+			</div>
+			
+			<div class="form-group">
+    			<div class="col-sm-offset-2 col-xs-7">
+	    			<%= link_to 'Cancel', experiences_path,class: "btn btn-default btn-xs", role: "button" %>
+					<button type="button" class="btn btn-warning btn-xs" id="backtInfoBtn">Back</button>
+					<button type="button" class="btn btn-primary btn-xs" id="nextInfoBtn">Next</button>
+    			</div>
+  			</div>
+		</div>
+		<div class="tab-pane" id="location">
+			
+				<%= f.fields_for :location do |location| %>
+				
+					<div class="form-group">
+						<%= location.label :country, class: "col-sm-2 control-label" %>
+						<div class="col-xs-3">
+							<%= location.text_field :country, class: "form-control input-lg" %>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<%= location.label :city, class: "col-sm-2 control-label" %>
+						<div class="col-xs-3">
+							<%= location.text_field :city, class: "form-control input-lg" %>
+						</div>
+					</div>
+					<div class="form-group">
+						<%= location.label :zip_code, class: "col-sm-2 control-label" %>
+						<div class="col-xs-3">
+							<%= location.text_field :zip_code, class: "form-control input-lg" %>
+						</div>
+					</div>
+					<div class="form-group">
+						<%= location.label :adress, class: "col-sm-2 control-label" %>
+						<div class="col-xs-5">
+							<%= location.text_field :adress, class: "form-control input-lg" %>
+						</div>
+					</div>
+					
+			  	<% end %>
+			  
+						
+				
+				<div class="form-group">
+	    			<div class="col-sm-offset-2 col-xs-7">
+						<%= link_to 'Cancel', experiences_path,class: "btn btn-default btn-xs", role: "button" %>
+						<button type="button" class="btn btn-warning btn-xs" id="backtLocationBtn">Back</button>
+						<button type="button" class="btn btn-success btn-xs" id="saveBtn">Save</button>
+	    			</div>
+  				</div>
+		</div>
+	
+	</div>
+	</div>
+  
+<% end %>
